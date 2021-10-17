@@ -34,13 +34,17 @@ namespace JwtService
             var token = Configuration.GetSection("tokenConfig").Get<TokenManagement>();
             services.AddAuthentication(x =>
             {
+                // 默认身份验证方案
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                // 默认挑战方案
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
+                // 需要http的元数据吗
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 //Token Validation Parameters
+                // 令牌验证参数
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
